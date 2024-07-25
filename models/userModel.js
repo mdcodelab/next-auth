@@ -4,23 +4,20 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema(
   {
-    name: {
-      type: String
-    },
+    firstName: { type: String, required: true},
 
-    email: {
-      type: String, unique: true},
+    lastName: { type: String, required: true },
+
+    email: { type: String, required: true },
 
     emailVerified: { type: Date },
 
-    password: {type: String, select: false},
+    password: { type: String, select: false },
 
-    image: {
-      type: String,
-    },
+    image: {type: String},
 
     //for Google atc.
-    authProviderId: {type: String},
+    authProviderId: { type: String },
 
     accounts: [
       {
@@ -40,10 +37,9 @@ const UserSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: "Answer",
       },
-
     ],
 
-    result: {type: Number, default: 0},
+    result: { type: Number, default: 0 },
 
     updatedAt: {
       type: Date,

@@ -8,10 +8,7 @@ const AccountSchema = new Schema(
       ref: "User",
       required: true,
     },
-    provider: {
-      type: String,
-      required: true,
-    },
+    provider: {type: String, required: true},
     providerAccountId: {
       type: String,
       required: true,
