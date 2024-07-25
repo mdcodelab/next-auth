@@ -1,6 +1,6 @@
 "use server";
 
-import connectDB from "@/config/database";
+import connectDB from "@/utils/database";
 import User from "@/models/userModel";
 import * as z from "zod";
 import bcrypt from "bcryptjs";

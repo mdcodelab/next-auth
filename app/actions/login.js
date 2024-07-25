@@ -1,12 +1,10 @@
 "use server";
-import connectDB from "@/config/database";
+import connectDB from "@/utils/database";
 import User from "@/models/userModel";
 import * as z from "zod";
 import { signIn } from "@/auth";
-import {DEFAULT_VALUE_REDIRECT} from "@/routes";
 import { AuthError } from "next-auth";
-import { redirect } from "next/navigation";
-import { FaPersonThroughWindow } from "react-icons/fa6";
+
 
 const LoginSchema = z.object({
   email: z.string().email({ message: "Email is required." }), 
@@ -29,7 +27,7 @@ export const login = async (value) => {
     console.log(email, password);
 
     try {
-      await signIn("Credentials", { email, password}, redirectTo="/settings");
+      await signIn("Credentials", { email, password});
   
       return { success: "Login successful." };
 
