@@ -28,5 +28,4 @@ const hashedPassword = await hash(password, 12);
 const plainUser = JSON.parse(JSON.stringify(user));
 console.log(plainUser);
 redirect("/auth/login");
- console.log("This should not be logged");
 };

@@ -1,44 +1,56 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import * as z from "zod";
 import { compare } from "bcryptjs";
-import { getUserByEmail } from "./utils/getUser";
+import connectDB from "./utils/database";
+import User from "./models/userModel";
 
-const LoginSchema = z.object({
-  email: z.string().email({ message: "Email is required." }),
-  password: z
-    .string()
-    .min(6, { message: "Password must be at least 6 characters long" }),
-});
-
-export const {
-  handlers,
-  signIn,
-  signOut,
-  auth,
-} = NextAuth({
+export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
-    // Credentials({
-    //   name: "Credentials",
-    //   async authorize(credentials) {
-    //     const email = credentials.email;
-    //     const password = credentials.password;
-    //     console.log(email, password);
-    //     console.log("credentials", credentials);
-    //     const validateFields = LoginSchema.safeParse(credentials);
-    //     if (validateFields.success) {
-    //       const { email, password } = validateFields.data;
+    Credentials({
+      name: "Credentials",
+      credentials: {
+        email: { label: "email", type: "email" },
+        password: { label: "password", type: "password" },
+      },
+      authorize: async (credentials) => {
+        const email = credentials?.email;
+        const password = credentials?.password;
 
-    //       const existingUser = await getUserByEmail(email);
-    //       console.log(existingUser);
-    //       if (!existingUser || !existingUser.password) return null; // no password, logged with google
+        if (!email || !password) {
+          return null;
+        }
 
-    //       const passwordMatch = await compare(password, existingUser.password);
-    //       if (passwordMatch) return existingUser;
-    //     }
-    //     return null;
-    //   },
-    // }),
-  ]
+        await connectDB();
+        const existingUser = await User.findOne({ email }).select(
+          "+password +role"
+        );
+        if (!existingUser || !existingUser.password) {
+          return null; // no password, logged with google
+        }
+
+        console.log(existingUser);
+
+        const passwordMatch = await compare(password, existingUser.password);
+        if (passwordMatch) {
+          const userData = {
+            firstName: existingUser.firstName,
+            lastName: existingUser.lastName,
+            email: existingUser.email,
+            role: existingUser.role,
+            id: existingUser._id,
+            result: existingUser.result,
+            answers: [],
+          };
+          return userData;
+        } else {
+          return null;
+        }
+      },
+    }),
+  ],
+
+  pages: {
+    signIn: "/auth/login",
+  },
   
 });
