@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-import { getUser } from "@/app/actions/register";
 
 function ProfilePage() {
   

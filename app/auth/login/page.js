@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input"; // Asigură-te că acest import este corect
 import { Label } from "@/components/ui/label";
 import { FaGoogle } from "react-icons/fa";
-//import { login } from "@/actions/login"; // Asigură-te că acest import este corect
+import { loginUser } from "@/app/actions/userActions";
 //import FormError from "@/components/FormError";
 //import FormSuccess from "@/components/FormSuccess";
 
@@ -15,7 +15,7 @@ async function LoginPage() {
         <CardTitle className="text-center">Welcome Back!</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-4">
-        <form className="space-y-6">
+        <form className="space-y-6" action={loginUser}>
           <div className="space-y-4">
             <Label htmlFor="email" className="text-lg">Email:</Label>
             <Input name="email" id="email" type="email" placeholder="Your email..." className="w-full"/>

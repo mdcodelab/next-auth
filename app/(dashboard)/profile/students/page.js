@@ -1,9 +1,8 @@
-import { getAllUsers } from "@/utils/getUser";
+
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table"
 
 async function StudentsPage() {
-  const users=await getAllUsers();
-  console.log(users);
+  
 
   return (
     <div className="rounded-md border">
@@ -18,7 +17,7 @@ async function StudentsPage() {
         </TableHeader>
 
         <TableBody>
-          {users.map((user, index) => {
+          {/* {users.map((user, index) => {
             return (
               <TableRow key={user._id}>
                 <TableCell>{user._id}</TableCell>
@@ -27,7 +26,7 @@ async function StudentsPage() {
                 <TableCell>{user.result}</TableCell>
               </TableRow>
             );
-          })}
+          })} */}
         </TableBody>
       </Table>
     </div>
