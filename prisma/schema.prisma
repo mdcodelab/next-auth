@@ -67,3 +67,13 @@ model VerificationToken {
   @@map("verificationtokens")
 }
 
+//npx i -D prisma
+//npx prisma init
+//compose schema
+//npx prisma generate (when modify schema)
+//npx prisma db push (sincronize schema)
+//npx prisma migrate dev (create tables on neon)
+//npx peisma studio (sqlite)
+//npx prisma status (verify status)
+
+
