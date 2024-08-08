@@ -9,9 +9,10 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 
 model Account {
   id                 String  @id @default(cuid())
@@ -75,5 +76,3 @@ model VerificationToken {
 //npx prisma migrate dev (create tables on neon)
 //npx peisma studio (sqlite)
 //npx prisma status (verify status)
-
-

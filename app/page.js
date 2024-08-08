@@ -3,9 +3,9 @@
 function HomePage() {
   return (
     <div>
-      hello
+      Home page
     </div>
   )
 }
 
-export default HomePage
+export default HomePage;
